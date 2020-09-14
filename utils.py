@@ -7,56 +7,45 @@ from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications.vgg16 import preprocess_input
 from tensorflow.keras.models import Model
 from tensorflow.keras.models import load_model
+from keras.applications.resnet50 import ResNet50
+from keras.optimizers import Adam
+from keras.layers import Dense, Flatten,Input, Convolution2D, Dropout, LSTM, TimeDistributed, Embedding, Bidirectional, Activation, RepeatVector,Concatenate
+from keras.models import Sequential
+from keras.utils import np_utils
+import random
+from keras.preprocessing import image, sequence
 
 
 # extract features from each photo in the directory
-def extract_features(image):
-    # load the model
-    model = VGG16()
-    # re-structure the model
-    model = Model(inputs=model.inputs, outputs=model.layers[-2].output)
-    # reshape data for the model
-    image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
-    # prepare the image for the VGG model
-    image = preprocess_input(image)
-    # get features
-    feature = model.predict(image, verbose=0)
-    return feature
+def preprocessing(img_path):
+    im = image.load_img(img_path, target_size=(224,224,3))
+    im = image.img_to_array(im)
+    im = np.expand_dims(im, axis=0)
+    return im
         
  
 # map an integer to a word
-def word_for_id(integer, tokenizer):
-	for word, index in tokenizer.word_index.items():
-		if index == integer:
-			return word
-	return None
- 
-# generate a description for an image
-def generate_desc(model, tokenizer, photo, max_length):
-    # seed the generation process
-    in_text = ' '
-    # iterate over the whole length of the sequence
-    for i in range(max_length):
-        # integer encode input sequence
-        sequence = tokenizer.texts_to_sequences([in_text])[0]
-        # pad input
-        sequence = pad_sequences([sequence], maxlen=max_length)
-        # predict next word
-        yhat = model.predict([photo,sequence], verbose=0)
-        # convert probability to integer
-        yhat = argmax(yhat)
-        # map integer to word
-        word = word_for_id(yhat, tokenizer)
-        # stop if we cannot map the word
-        if word is None:
+def get_encoding(model, img):
+    image = preprocessing(img)
+    pred = model.predict(image).reshape(2048)
+    return pred
+
+resnet = ResNet50(include_top=False,weights='imagenet',input_shape=(224,224,3),pooling='avg')
+
+
+def predict_captions(image):
+    start_word = ["<start>"]
+    while True:
+        par_caps = [word_2_indices[i] for i in start_word]
+        par_caps = sequence.pad_sequences([par_caps], maxlen=max_len, padding='post')
+        preds = model.predict([np.array([image]), np.array(par_caps)])
+        word_pred = indices_2_word[np.argmax(preds[0])]
+        start_word.append(word_pred)
+        
+        if word_pred == "<end>" or len(start_word) > max_len:
             break
-        # append as input for generating the next word
-        in_text += ' ' + word
-        # stop if we predict the end of the sequence
-        if word == 'endseq':
-            break
-    in_text = in_text.replace("endseq", "")
-    return in_text
+            
+    return ' '.join(start_word[1:-1])
 
 # load the tokenizer
 tokenizer = load(open('model/tokenizer.pkl', 'rb'))
