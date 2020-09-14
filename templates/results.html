@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ICG</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+
+<body>
+        <header>
+
+                <nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark">
+                <div class="container">
+                  <a class="navbar-brand" href="/home">Analog</a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="main_nav">	
+                    <ul class="navbar-nav ml-auto">
+                      <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}"> About </a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{ url_for('team') }}"> Team </a></li>
+                    </ul>
+                  </div> <!-- navbar-collapse.// -->
+                </div> <!-- container.// -->
+                </nav>
+                </header>
+    <div class="container py-5">
+
+        <!-- For demo purpose -->
+        <header class="text-white text-center">
+            <h1 class="display-4">Image Caption Generator</h1>
+            <p class="lead mb-0">Upload an image and the caption for the image will be generated for you.</p>
+
+            <img src="https://res.cloudinary.com/mhmd/image/upload/v1564991372/image_pxlho1.svg" alt="" width="150"
+                class="mb-4 mt-5">
+        </header>
+
+
+        <div class="row py-4">
+            <div class="col-lg-6 mx-auto">
+
+                <!-- Uploaded image area-->
+                
+                <div class="image-area mt-4 mb-5"><img id="imageResult" src="data:image/jpeg;base64, {{ image }}" alt=""
+                  class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                  <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm text-center">
+ 
+                <div class="text-center">
+                      <p class="pl-4"> {{caption}} </p>
+                      </div>
+                      
+            </div>
+           
+        </div>
+    </div>
+
+</body>
+
+</html>

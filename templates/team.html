@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ICG</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+
+<body>
+        <header >
+
+                <nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark">
+                <div class="container">
+                  <a class="navbar-brand" href="/home">Analog</a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="main_nav">	
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}"> About </a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('team') }}"> Team </a></li>
+                    </ul>
+                  </div> <!-- navbar-collapse.// -->
+                </div> <!-- container.// -->
+                </nav>
+     </header>
+    <!-- Page Content -->
+<div class="container">
+        <header class="text-white text-center mb-5">
+                <h1 class="display-4">Wright Team </h1>
+        </header>
+    <div class="row">
+      <!-- Team Member 1 -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 shadow">
+          <!-- <img src="{{ url_for('static', filename='images/hannah.jpg') }}" class="card-img-top" alt="..."> -->
+          <div style="background-image: url(../static/images/hannah.jpg);" class="team-image">
+
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Hannah Lormenyo</h5>
+            <div class="card-text text-black-50">Fullstack Software Engineer </div>
+          </div>
+        </div>
+      </div>
+      <!-- Team Member 2 -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 shadow">
+          <div style="background-image: url(../static/images/yoma.jpg);" class="team-image">
+
+          </div>
+          <!-- <img src="{{ url_for('static', filename='images/yoma.jpg') }}" class="card-img-top" alt="..."> -->
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0"> Ogheneyoma Okobiah</h5>
+            <div class="card-text text-black-50"> Cloud and ML Engineer</div>
+          </div>
+        </div>
+      </div>
+      <!-- Team Member 3 -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 shadow">
+          <!-- <img src="{{ url_for('static', filename='images/james.png') }}" class="card-img-top" alt="..."> -->
+          <div style="background-image: url(../static/images/james.png);" class="team-image">
+
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">James Sandy </h5>
+            <div class="card-text text-black-50">Machine Learning Engineer</div>
+          </div>
+        </div>
+      </div>
+      <!-- Team Member 4 -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 shadow">
+          <!-- <img src="https://source.unsplash.com/ZI6p3i9SbVU/500x350" class="card-img-top" alt="..."> -->
+          <div style="background-image: url(../static/images/gugu.jpg);" class="team-image">
+
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Nomagugu Siwela </h5>
+            <div class="card-text text-black-50">Researcher</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+  
+  </div>
+  <!-- /.container -->
+
+</body>
+
+</html>
