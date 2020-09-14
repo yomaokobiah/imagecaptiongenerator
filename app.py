@@ -35,30 +35,11 @@ def about():
 @app.route("/generateCaption", methods=["POST"])
 def generateCaption():
     image = request.files['image']
-    
-    imgBinary = image.read()
-
-    # convert string of image data to uint8
-    nparr = np.fromstring(imgBinary, np.uint8)
-    # decode image
-    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-
-    imgencoded = cv2.imencode(".jpg", img)[1]
-
-    jpg_as_text = base64.b64encode(imgBinary)
-
-    jpg_as_text = jpg_as_text.decode('ascii')
-   
-    img = cv2.resize(img, (224, 224))
-    # print(jpg_as_text)
-
-
-    photo = extract_features(img)
-    # generate description
-    caption = generate_desc(model, tokenizer, photo, max_length)
+    test_img = get_encoding(resnet, image)
+    Argmax_Search = predict_captions(test_img)
 
     # caption = "Cute cat for Erwin Schrodinger"
-    return render_template("results.html", image=jpg_as_text, caption=caption)
+    return render_template("results.html", image=jpg_as_text, Argmax_Search=Argmax_Search)
 
 
 
